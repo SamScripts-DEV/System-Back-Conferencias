@@ -38,7 +38,7 @@ const getAuditorioById = async (req, res) => {
     try {
         const { id } = req.params;
         if (!Types.ObjectId.isValid(id)) return res.status(400).json({ res: `ID ${id} no válido` })
-        const auditorio = await Auditorio.findById(id).select('-tratamientos').populate('conferencista', 'cedula nombre')
+        const auditorio = await Auditorio.findById(id).select('-conferencias').populate('conferencista', 'cedula nombre')
 
         if (!auditorio) {
             return res.status(404).json({ message: 'Auditorio no encontrado' });

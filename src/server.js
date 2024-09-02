@@ -5,6 +5,7 @@ import cors from 'cors';
 import routerUsuario from './routers/usuario.routes.js'
 import routerConferencista from './routers/conferencista.routes.js'
 import routerAuditorio from './routers/auditorio.routes.js'
+import routerReserva from './routers/reserva.routes.js'
 
 
 
@@ -27,6 +28,7 @@ app.use(express.json())
 app.use('/api', routerUsuario)
 app.use('/api', routerConferencista)
 app.use('/api', routerAuditorio)
+app.use('/api', routerReserva)
 // Manejo de una ruta que no sea encontrada
 app.use((req,res)=>res.status(404).send("Endpoint no encontrado - 404"))
 
