@@ -5,22 +5,22 @@ const reservaSchema = new mongoose.Schema({
         type: String,
         default: () => Math.random().toString(36).substring(2, 8).toUpperCase(),
         unique: true,
-        required: true
+        
     },
     descripcion: {
         type: String,
         required: true
     },
-    auditorio: {
+    auditorio:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Auditorio',
         required: true
-    },
-    conferencista: {
+    }],
+    conferencista: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Conferencista',
         required: true
-    },
+    }],
 });
 
 export default mongoose.model('Reserva', reservaSchema);

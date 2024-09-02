@@ -1,4 +1,5 @@
 import Reserva from "../models/Reserva.js";
+import { Types } from "mongoose";
 
 
 const obtenerReservas = async (req, res) => {
@@ -17,7 +18,7 @@ const getReservabyId = async (req, res) => {
     try {
         const {id} = req.params;
         if (!Types.ObjectId.isValid(id)) return res.status(400).json({ res: `ID ${id} no válido` })
-        const reserva = await Reserva.findById(req.params.id).populate('auditorio conferencista');
+        const reserva = await Reserva.findById(req.params.id).populate('auditorio').populate('conferencista');
         if (!reserva) {
             return res.status(404).json({ res: 'Reserva no encontrada' });
         }
@@ -38,6 +39,8 @@ const crearReserva = async (req, res) => {
         res.status(201).json({res: 'Reserva registrada correctamente', reserva});
     } catch (error) {
         res.status(500).json({ res: 'Error al crear la reserva' });
+        console.log(error);
+        
     }
 };
 
